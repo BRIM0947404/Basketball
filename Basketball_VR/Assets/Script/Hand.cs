@@ -4,34 +4,34 @@ using UnityEngine.XR;
 
 public class Hand : MonoBehaviour
 {
-    [SerializeField] private XRNode handNode;
+    [SerializeField] private XRNode _handNode;
 
-    private UnityEngine.XR.InputDevice device;
+    private bool _isGRabbing;
+
+    public bool IsGrabbing => _isGRabbing;
+
+    private UnityEngine.XR.InputDevice _device;
 
     public void Update()
     {
-        if (!device.isValid)
+        if (!_device.isValid)
         {
-            device = InputDevices.GetDeviceAtXRNode(handNode);
+            _device = InputDevices.GetDeviceAtXRNode(_handNode);
         }
 
-        if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition,out Vector3 position))
+        if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition,out Vector3 position))
         {
             transform.localPosition = position;
         }
 
-        if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceRotation, out Quaternion rotation))
+        if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceRotation, out Quaternion rotation))
         {
             transform.localRotation = rotation;
         }
 
-        bool pressed;
-        if (device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out pressed))
+        if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out bool pressed))
         {
-            if (pressed)
-            {
-                Debug.Log("Grip!");
-            }
+           _isGRabbing = pressed;
         }
     }
 }
