@@ -6,6 +6,6 @@ The player cannot move, only their arms. THe score is shown on the left arm. Whe
 
 A ball spawn every time you pick one.
 
-Known bug:
+Known bugs:
 - Sometimes, having both arms in the ball spawn can make it so it doesnt spawn any more balls
 - Ball velocity would need a bit more work
