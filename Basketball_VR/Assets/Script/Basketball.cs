@@ -32,4 +32,9 @@ public class Basketball : MonoBehaviour
     {
         _spawner = spawner;
     }
+
+    public float GetVerticalVelocity()
+    {
+        return _rb.linearVelocity.y;
+    }
 }
