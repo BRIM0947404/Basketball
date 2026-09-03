@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class Grabber : MonoBehaviour
 {
@@ -46,6 +47,7 @@ public class Grabber : MonoBehaviour
         _basketball = ball;
 
         ball.Grab(transform);
+        _hand.SendHaptic();
     }
 
     private void OnDrawGizmosSelected()

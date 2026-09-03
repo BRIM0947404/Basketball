@@ -34,4 +34,12 @@ public class Hand : MonoBehaviour
            _isGRabbing = pressed;
         }
     }
+
+    public void SendHaptic()
+    {
+        if (!_device.isValid)
+            return;
+
+        _device.SendHapticImpulse(0, 0.5f, 0.08f);
+    }
 }
