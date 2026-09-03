@@ -47,7 +47,7 @@ public class Grabber : MonoBehaviour
         _basketball = ball;
 
         ball.Grab(transform);
-        _hand.SendHaptic();
+        _hand.SendGrabBallHaptic();
     }
 
     private void OnDrawGizmosSelected()

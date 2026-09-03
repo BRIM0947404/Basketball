@@ -1,14 +1,13 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.XR;
+using TMPro;
 
 public class Hand : MonoBehaviour
 {
     [SerializeField] private XRNode _handNode;
-
-    private bool _isGRabbing;
-
-    public bool IsGrabbing => _isGRabbing;
+    [SerializeField] private TMP_Text _scoreText;
+    
+    public bool IsGrabbing { get; private set; }
 
     private UnityEngine.XR.InputDevice _device;
 
@@ -31,15 +30,31 @@ public class Hand : MonoBehaviour
 
         if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out bool pressed))
         {
-           _isGRabbing = pressed;
+           IsGrabbing = pressed;
         }
     }
 
-    public void SendHaptic()
+    public void SendGrabBallHaptic()
+    {
+        SendHaptic(0.5f, 0.08f);
+    }
+    
+    public void SendPointHaptic()
+    {
+        SendHaptic(0.75f, 1f);
+    }
+
+    public void SendHaptic(float amplitude, float duration)
     {
         if (!_device.isValid)
             return;
 
-        _device.SendHapticImpulse(0, 0.5f, 0.08f);
+        _device.SendHapticImpulse(0, amplitude, duration);
+    }
+
+    public void UpdateScore(int currentScore)
+    {
+        SendPointHaptic();
+        _scoreText.text = $"Score: {currentScore}";
     }
 }
