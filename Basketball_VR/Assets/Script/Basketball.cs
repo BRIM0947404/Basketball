@@ -15,12 +15,14 @@ public class Basketball : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
     }
-    public void Release()
+
+    public void Release(Vector3 velocity)
     {
         transform.SetParent(null);
 
         _rb.isKinematic = false;
         _rb.detectCollisions = true;
         _rb.useGravity = true;
+        _rb.linearVelocity = velocity;
     }
 }

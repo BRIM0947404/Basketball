@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2059262297020746241}
   - component: {fileID: 331413521635241617}
+  - component: {fileID: 7946394542024707815}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -49,6 +50,21 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _hand: {fileID: 2839955873129277472}
+  _velocityTracker: {fileID: 7946394542024707815}
+--- !u!114 &7946394542024707815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5421959726341621800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dc892688b0f9044f83b1ea10091cb58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _frameCount: 5
+  _multiplier: 1
 --- !u!1 &7196933360770321062
 GameObject:
   m_ObjectHideFlags: 0

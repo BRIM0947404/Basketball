@@ -5,6 +5,7 @@ public class Grabber : MonoBehaviour
     [SerializeField] private float _grabRadius = 0.15f;
     [SerializeField] private LayerMask _grabbableLayer;
     [SerializeField] private Hand _hand;
+    [SerializeField] private VelocityTracker _velocityTracker;
 
     private Basketball _basketball;
 
@@ -57,7 +58,7 @@ public class Grabber : MonoBehaviour
         if (_basketball == null)
             return;
 
-        _basketball.Release();
+        _basketball.Release(_velocityTracker.GetVelocity());
 
         _basketball = null;
     }
