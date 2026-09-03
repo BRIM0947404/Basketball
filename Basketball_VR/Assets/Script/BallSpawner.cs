@@ -4,27 +4,27 @@ public class BallSpawner : MonoBehaviour
 {
     [SerializeField] private Basketball _ballPrefab;
 
-    private bool _canSpawn;
+    private Basketball _currentBall;
 
-    private void Start()
+    void Start()
     {
-        _canSpawn = true;
+        _currentBall = null;
         SpawnBall();
     }
 
-    public void BallTaken()
+    public void BallGrabbed()
     {
-        _canSpawn = true;
+        _currentBall.OnBallGrabbed -= BallGrabbed;
+        _currentBall = null;
         SpawnBall();
     }
 
     private void SpawnBall()
     {
-        if (!_canSpawn)
+        if (_currentBall != null)
             return;
+        _currentBall = Instantiate(_ballPrefab, transform.position, transform.rotation);
+        _currentBall.OnBallGrabbed += BallGrabbed;
 
-        _canSpawn = false;
-        Basketball ball = Instantiate(_ballPrefab, transform.position, transform.rotation);
-        ball.SetSpawner(this); // listener instead
     }
 }

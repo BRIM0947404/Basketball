@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Grabber : MonoBehaviour
 {
@@ -24,17 +23,13 @@ public class Grabber : MonoBehaviour
 
     private void TryGrab()
     {
-        Collider[] colliders = Physics.OverlapSphere(
-            transform.position,
-            _grabRadius,
-            _grabbableLayer
-        );
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _grabRadius, _grabbableLayer);
 
         foreach (Collider collider in colliders)
         {
             Basketball ball = collider.GetComponentInParent<Basketball>();
 
-            if (ball != null)
+            if (ball != null && !ball.IsGrabbed)
             {
                 Grab(ball);
                 return;

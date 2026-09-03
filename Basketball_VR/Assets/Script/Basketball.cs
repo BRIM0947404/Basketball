@@ -1,11 +1,17 @@
+using System;
 using UnityEngine;
 
 
 public class Basketball : MonoBehaviour
 {
+    public Action OnBallGrabbed;
     [SerializeField] private Rigidbody _rb; // TODO check if not null
 
     private BallSpawner _spawner;
+
+    public bool IsGrabbed => _rb.isKinematic;
+
+
     public void Grab(Transform hand)
     {
         _rb.isKinematic = true;
@@ -15,7 +21,7 @@ public class Basketball : MonoBehaviour
 
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
-        _spawner.BallTaken();
+        OnBallGrabbed?.Invoke();
     }
 
     public void Release(Vector3 velocity)

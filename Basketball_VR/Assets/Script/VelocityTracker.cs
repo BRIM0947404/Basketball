@@ -3,17 +3,15 @@ using UnityEngine;
 
 public class VelocityTracker : MonoBehaviour
 {
-    [SerializeField] private int _frameCount = 5;
-    [SerializeField] private float _multiplier = 1;
+    [SerializeField] private HandScriptableObject _handScriptableObject;
     private List<Vector3> _positions = new List<Vector3>();
 
 
-    // Update is called once per frame
     void Update()
     {
         _positions.Add(transform.position);
 
-        if (_positions.Count > _frameCount)
+        if (_positions.Count > _handScriptableObject.VelocityFrameCount)
         {
             _positions.RemoveAt(0);
         }
@@ -28,9 +26,9 @@ public class VelocityTracker : MonoBehaviour
 
         for (int i = 1; i < _positions.Count; i++)
         {
-            velocity += ( _positions[i] -  _positions[i - 1]) / Time.deltaTime;
+            velocity += ( _positions[i] - _positions[i - 1]) / Time.deltaTime; // Should use the time between each position instead. Work for now.
         }
             
-        return velocity / (_positions.Count - 1) * _multiplier;
+        return velocity / (_positions.Count - 1) * _handScriptableObject.Multiplier;
     }
 }

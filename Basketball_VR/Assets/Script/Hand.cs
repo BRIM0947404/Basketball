@@ -6,10 +6,11 @@ public class Hand : MonoBehaviour
 {
     [SerializeField] private XRNode _handNode;
     [SerializeField] private TMP_Text _scoreText;
+    [SerializeField] private HandScriptableObject _handScriptableObject;
     
     public bool IsGrabbing { get; private set; }
 
-    private UnityEngine.XR.InputDevice _device;
+    private InputDevice _device;
 
     public void Update()
     {
@@ -18,17 +19,17 @@ public class Hand : MonoBehaviour
             _device = InputDevices.GetDeviceAtXRNode(_handNode);
         }
 
-        if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.devicePosition,out Vector3 position))
+        if (_device.TryGetFeatureValue(CommonUsages.devicePosition,out Vector3 position))
         {
             transform.localPosition = position;
         }
 
-        if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.deviceRotation, out Quaternion rotation))
+        if (_device.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation))
         {
             transform.localRotation = rotation;
         }
 
-        if (_device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.gripButton, out bool pressed))
+        if (_device.TryGetFeatureValue(CommonUsages.gripButton, out bool pressed))
         {
            IsGrabbing = pressed;
         }
@@ -36,12 +37,12 @@ public class Hand : MonoBehaviour
 
     public void SendGrabBallHaptic()
     {
-        SendHaptic(0.5f, 0.08f);
+        SendHaptic(_handScriptableObject.HapticGrabIntensity, _handScriptableObject.HapticGrabDuration);
     }
     
     public void SendPointHaptic()
     {
-        SendHaptic(0.75f, 1f);
+        SendHaptic(_handScriptableObject.HapticScoreIntensity, _handScriptableObject.HapticScoreDuration);
     }
 
     public void SendHaptic(float amplitude, float duration)

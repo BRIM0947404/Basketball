@@ -199,8 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc892688b0f9044f83b1ea10091cb58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _frameCount: 5
-  _multiplier: 1
+  _handScriptableObject: {fileID: 11400000, guid: c13f1dd75cdd74d4e8468aa2a6cb86f9, type: 2}
 --- !u!1 &6449924762635097323
 GameObject:
   m_ObjectHideFlags: 0
@@ -352,6 +351,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _handNode: 4
   _scoreText: {fileID: 368310670584883987}
+  _handScriptableObject: {fileID: 11400000, guid: c13f1dd75cdd74d4e8468aa2a6cb86f9, type: 2}
 --- !u!1 &7881730470019935321
 GameObject:
   m_ObjectHideFlags: 0
